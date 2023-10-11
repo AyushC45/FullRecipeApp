@@ -12,7 +12,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter App with Bottom Navigation',
       theme: ThemeData.dark(),
-      home: MyBottomNavigationBar(),
+      home: MyBottomNavigationBar(
+      ),
     );
   }
 }
@@ -39,11 +40,13 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+                Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today),
+            icon: Icon(
+                Icons.calendar_today),
             label: 'Meal Plan',
           ),
         ],

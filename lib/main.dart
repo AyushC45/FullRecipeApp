@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App with Bottom Navigation',
+      title: 'Recipe App',
       theme: ThemeData.dark(),
       home: MyBottomNavigationBar(
       ),

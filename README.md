@@ -1,5 +1,6 @@
 # full_recipe_app
 
-A recipe app. 
+This is our recipe app. 
 
 ## Getting Started
+

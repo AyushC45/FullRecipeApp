@@ -20,12 +20,12 @@ class _HomeScreen extends State<HomeScreen> {
   }
 
   Future<void> fetchRecipes() async {
-    final apiKey = 'ba0cf77242msh348aa0ac45fded0p1de99cjsnbc922a1ac5d6'; // Replace with your actual API key
+    final apiKey = 'ba0cf77242msh348aa0ac45fded0p1de99cjsnbc922a1ac5d6';
     final url = Uri.parse('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch');
 
     try {
       final response = await http.get(url, headers: {
-        'X-RapidAPI-Key': apiKey, // Use 'X-RapidAPI-Key' for RapidAPI
+        'X-RapidAPI-Key': apiKey,
         'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
       });
 
@@ -40,8 +40,8 @@ class _HomeScreen extends State<HomeScreen> {
               title: recipeData['title'],
               image: recipeData['image'],
               imageType: recipeData['imageType'],
-              ingredients: [], // Populate this with the ingredients
-              instructions: "", // Populate this with the instructions
+              ingredients: [],
+              instructions: "",
             );
           }).toList();
         });

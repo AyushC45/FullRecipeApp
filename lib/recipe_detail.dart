@@ -24,8 +24,10 @@ class _RecipeDetailState extends State<RecipeDetail> {
   }
 
   Future<void> fetchRecipeDetails() async {
-    final apiKey = 'ba0cf77242msh348aa0ac45fded0p1de99cjsnbc922a1ac5d6'; // Replace with your actual API key
-    final url = Uri.parse('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${widget.recipeId}/information');
+    final apiKey = 'ba0cf77242msh348aa0ac45fded0p1de99cjsnbc922a1ac5d6';
+    final url = Uri.parse(
+        'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${widget
+            .recipeId}/information');
 
     try {
       final response = await http.get(url, headers: {
@@ -45,9 +47,11 @@ class _RecipeDetailState extends State<RecipeDetail> {
           // Check if the instructions are in HTML format
           if (data['instructions'] is String) {
             // Remove HTML tags from instructions
-            instructions = data['instructions'].replaceAll(RegExp(r'<[^>]*>'), '');
+            instructions =
+                data['instructions'].replaceAll(RegExp(r'<[^>]*>'), '');
           } else {
-            instructions = data['instructions'] ?? "Instructions coming soon. Try whatever you want";
+            instructions = data['instructions'] ??
+                "Instructions coming soon. Try whatever you want";
           }
         });
       } else {
@@ -68,7 +72,17 @@ class _RecipeDetailState extends State<RecipeDetail> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            if (widget.imageUrl.isNotEmpty) Image.network(widget.imageUrl), // Display the recipe image if URL is not empty
+            if (widget.imageUrl.isNotEmpty) Image.network(widget.imageUrl),
+            // Display the recipe image if URL is not empty
+            SizedBox(height: 16.0),
+            ElevatedButton.icon(
+              onPressed: () {
+                // Add your function here if needed
+              },
+              icon: Icon(Icons.calendar_today),
+              label: Text('Add to Meal Plan'),
+            ),
+
             SizedBox(height: 16.0),
             Text(
               'Ingredients:',
@@ -80,7 +94,16 @@ class _RecipeDetailState extends State<RecipeDetail> {
               'Instructions:',
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            Text(instructions),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16.0),
+              child: Center(
+                child: Text(
+                  instructions,
+                  style: TextStyle(fontSize: 16),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -42,13 +42,16 @@ class _MyCalendarState extends State<MyCalendar>{
   }
 
   void addRecipeToDay(DateTime day, Recipe recipe) {
-    setState(() {
+
     if (!recipesByDate.containsKey(day)) {
+      setState(() {
       recipesByDate[day] = [recipe];
-    } else {
-      recipesByDate[day]?.add(recipe);
+    }); }else {
+      setState(() {
+        recipesByDate[day]?.add(recipe);
+      });
     }
-  });
+
     }
   Future<void> fetchRecipes() async {
     final apiKey = 'ba0cf77242msh348aa0ac45fded0p1de99cjsnbc922a1ac5d6'; // Replace with your actual API key

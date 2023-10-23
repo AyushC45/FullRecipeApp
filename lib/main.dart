@@ -12,8 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Recipe App',
       theme: ThemeData.dark(),
-      home: MyBottomNavigationBar(
-      ),
+      home: MyBottomNavigationBar(),
     );
   }
 }
@@ -25,7 +24,7 @@ class MyBottomNavigationBar extends StatefulWidget {
 
 class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
   int _currentIndex = 0;
-  final List<Widget> _screens = [HomeScreen(), MealPlanScreen()];
+  final List<Widget> _screens = [HomeScreen(), MyCalendar()];
 
   @override
   Widget build(BuildContext context) {
@@ -40,13 +39,11 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(
-                Icons.home),
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(
-                Icons.calendar_today),
+            icon: Icon(Icons.calendar_today),
             label: 'Meal Plan',
           ),
         ],

@@ -11,6 +11,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreen extends State<HomeScreen> {
   List<Recipe> recipes = [];
+  var isLoading = false;
+  String error = '';
+  String searchQuery = '';
 
   @override
   void initState() {
@@ -19,14 +22,20 @@ class _HomeScreen extends State<HomeScreen> {
     fetchRecipes();
   }
 
-  Future<void> fetchRecipes() async {
+  Future<void> fetchRecipes({String query = ''}) async {
     final apiKey = 'ba0cf77242msh348aa0ac45fded0p1de99cjsnbc922a1ac5d6';
-    final url = Uri.parse('https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch');
+    final url = Uri.parse(
+        'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch?query=$query');
+
+    setState(() {
+      isLoading = true;
+    });
 
     try {
       final response = await http.get(url, headers: {
         'X-RapidAPI-Key': apiKey,
-        'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+        'X-RapidAPI-Host':
+            'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
       });
 
       if (response.statusCode == 200) {
@@ -44,16 +53,21 @@ class _HomeScreen extends State<HomeScreen> {
               instructions: "",
             );
           }).toList();
+          isLoading = false;
         });
       } else {
-        throw Exception('Failed to fetch recipes');
+        setState(() {
+          error = 'Failed to fetch recipes';
+          isLoading = false;
+        });
       }
     } catch (e) {
-      print('Error: $e');
+      setState(() {
+        error = 'Error: $e';
+        isLoading = false;
+      });
     }
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -61,25 +75,49 @@ class _HomeScreen extends State<HomeScreen> {
       appBar: AppBar(
         title: Text('Recipes'),
       ),
-      body: ListView.builder(
-        itemCount: recipes.length,
-        itemBuilder: (context, index) {
-          final recipe = recipes[index];
-          return GestureDetector(
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => RecipeDetail(recipeId: recipe.id, imageUrl: recipe.image),
-                ),
-              );
-
-            },
-            child: ListTile(
-              title: Text(recipe.title),
-              leading: Image.network(recipe.image),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              decoration: InputDecoration(
+                hintText: 'Search Recipes',
+                prefixIcon: Icon(Icons.search),
+              ),
+              onChanged: (value) {
+                setState(() {
+                  searchQuery = value;
+                });
+              },
+              onSubmitted: (value) {
+                // Fetch recipes based on the search query when the user submits the search
+                fetchRecipes(query: searchQuery);
+              },
             ),
-          );
-        },
+          ),
+          Expanded(
+            child: ListView.builder(
+              itemCount: recipes.length,
+              itemBuilder: (context, index) {
+                final recipe = recipes[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => RecipeDetail(
+                            recipeId: recipe.id, imageUrl: recipe.image),
+                      ),
+                    );
+                  },
+                  child: ListTile(
+                    title: Text(recipe.title),
+                    leading: Image.network(recipe.image),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }

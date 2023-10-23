@@ -33,7 +33,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
     try {
       final response = await http.get(url, headers: {
         'X-RapidAPI-Key': apiKey,
-        'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
+        'X-RapidAPI-Host':
+            'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com',
       });
 
       if (response.statusCode == 200) {
@@ -75,8 +76,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
     starRecipes.add(recipeData); // Add the new recipe data to the list
 
     localStorage.setItem('starRecipes', starRecipes);
+    print(localStorage);
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +108,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     margin: EdgeInsets.only(left: 16.0), // Add left margin
                     child: Text(
                       'Ingredients:',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
@@ -116,9 +118,12 @@ class _RecipeDetailState extends State<RecipeDetail> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: ingredients.map((ingredient) {
-                  return Text(
-                    '• $ingredient',
-                    style: TextStyle(fontSize: 16),
+                  return Container(
+                    child: Text(
+                      '• $ingredient',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    margin: EdgeInsets.only(left: 16.0), // Add left margin
                   );
                 }).toList(),
               ),
@@ -130,7 +135,8 @@ class _RecipeDetailState extends State<RecipeDetail> {
                     margin: EdgeInsets.only(left: 16.0), // Add left margin
                     child: Text(
                       'Instructions:',
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

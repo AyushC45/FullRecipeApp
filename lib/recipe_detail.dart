@@ -105,38 +105,39 @@ class _RecipeDetailState extends State<RecipeDetail> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 16.0), // Add left margin
+                    margin: EdgeInsets.only(left: 16.0),
                     child: Text(
                       'Ingredients:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
               SizedBox(height: 10.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: ingredients.map((ingredient) {
-                  return Container(
-                    child: Text(
-                      '• $ingredient',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                    margin: EdgeInsets.only(left: 16.0), // Add left margin
-                  );
-                }).toList(),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: ingredients.map((ingredient) {
+                    return Container(
+                      margin: EdgeInsets.only(left: 16.0),
+                      child: Text(
+                        '• $ingredient',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    );
+                  }).toList(),
+                ),
               ),
               SizedBox(height: 30.0),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    margin: EdgeInsets.only(left: 16.0), // Add left margin
+                    margin: EdgeInsets.only(left: 16.0),
                     child: Text(
                       'Instructions:',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],

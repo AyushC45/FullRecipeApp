@@ -26,7 +26,7 @@ class _RecipeDetailState extends State<RecipeDetail> {
   }
 
   Future<void> fetchRecipeDetails() async {
-    final apiKey = 'ba0cf77242msh348aa0ac45fded0p1de99cjsnbc922a1ac5d6';
+    final apiKey = '81eb466186msh250d40552a8d0c6p1c592cjsn373627577f73';
     final url = Uri.parse(
         'https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${widget.recipeId}/information');
 
